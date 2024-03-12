@@ -1,38 +1,78 @@
-import { View, TextInput, Button, StyleSheet } from "react-native";
+import {
+  View,
+  TextInput,
+  Button,
+  StyleSheet,
+  Modal,
+  Image,
+} from "react-native";
 
 export default function GoalInput({
   addGoalHandler,
+  endAddGoalHandler,
   goalInputHandler,
   goalInput,
+  modalIsVisible,
 }) {
   return (
-    <View style={styles.inputContainer}>
-      <TextInput
-        style={styles.textInput}
-        placeholder="Write your goal..."
-        onChangeText={goalInputHandler}
-        value={goalInput}
-      />
-      <Button title="Add Goal" onPress={addGoalHandler} />
-    </View>
+    <Modal visible={modalIsVisible} animationType="slide">
+      <View style={styles.inputContainer}>
+        <Image
+          source={require("../assets/target-image.png")}
+          style={styles.image}
+        />
+        <TextInput
+          style={styles.textInput}
+          placeholder="Write your goal..."
+          onChangeText={goalInputHandler}
+          value={goalInput}
+        />
+        <View style={styles.buttonContainer}>
+          <View style={styles.button}>
+            <Button title="Add Goal" onPress={addGoalHandler} color="#b180f0" />
+          </View>
+          <View style={styles.button}>
+            <Button
+              title="Cancel"
+              onPress={endAddGoalHandler}
+              color="#f31282"
+            />
+          </View>
+        </View>
+      </View>
+    </Modal>
   );
 }
 
 const styles = StyleSheet.create({
   inputContainer: {
     flex: 1,
-    flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "center",
     alignItems: "center",
-    marginBottom: 24,
-    borderBottomWidth: 1,
-    borderBottomColor: "#ccc",
+    padding: 16,
+    backgroundColor: "#311b6b",
   },
   textInput: {
     borderWidth: 1,
-    borderColor: "#ccc",
-    width: "70%",
+    borderColor: "#e4d0ff",
+    backgroundColor: "#e4d0ff",
+    width: "100%",
     marginRight: 8,
-    padding: 8,
+    padding: 16,
+    color: "#120438",
+    borderRadius: 8,
+  },
+  buttonContainer: {
+    marginTop: 16,
+    flexDirection: "row",
+  },
+  button: {
+    width: 100,
+    marginHorizontal: 8,
+  },
+  image: {
+    width: 100,
+    height: 100,
+    margin: 20,
   },
 });
